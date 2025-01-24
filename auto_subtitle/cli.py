@@ -62,8 +62,9 @@ def main():
 
         video = ffmpeg.input(path)
         audio = video.audio
+        sr_pa = "/Users/surajtripathi/repo/personal/auto-subtitle/18509290e2cba14fe63aa538589333a7cf0a0322efba4eb7ee133c44ae78fb0.srt"
         ffmpeg.concat(
-            video.filter('subtitles', srt_path, force_style="OutlineColour=&H40000000,BorderStyle=3"), audio, v=1, a=1
+            video.filter('subtitles', sr_pa, force_style="OutlineColour=&H40000000,BorderStyle=3"), audio, v=1, a=1
         ).output(out_path).run(quiet=True, overwrite_output=True)
 
         print(f"Saved subtitled video to {os.path.abspath(out_path)}.")
@@ -81,7 +82,7 @@ def get_audio(paths):
         ffmpeg.input(path).output(
             output_path,
             acodec="pcm_s16le", ac=1, ar="16k"
-        ).run(quiet=True, overwrite_output=True)
+        ).run(overwrite_output=True)
 
         audio_paths[path] = output_path
 
